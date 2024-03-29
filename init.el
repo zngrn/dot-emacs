@@ -23,8 +23,15 @@
 (unless package-archive-contents
  (package-refresh-contents))
 
-;; Theme
-(load-theme 'flatui t)
+;; theme setup
+(setq custom-safe-themes t)
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-wilmersdorf))
 
 ;; Initial frame height and width
 (add-to-list 'default-frame-alist '(height . 100))
@@ -43,6 +50,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("1f292969fc19ba45fbc6542ed54e58ab5ad3dbe41b70d8cb2d1f85c22d07e518" default))
  '(package-selected-packages
    '(paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
