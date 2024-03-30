@@ -1,7 +1,11 @@
 ;; Remove tool, menu & scroll bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(tooltip-mode -1)
 (scroll-bar-mode -1)
+
+;; Remove startup message
+(setq inhibit-startup-screen t)
 
 ;; Highlight the line on point - always
 (global-hl-line-mode t)
@@ -10,7 +14,7 @@
 (column-number-mode)
 
 ;; Show line numbers
-(global-linum-mode)
+(global-display-line-numbers-mode t)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(term-mode-hook
@@ -46,7 +50,7 @@
 
 ;; Initial frame height and width
 (add-to-list 'default-frame-alist '(height . 100))
-(add-to-list 'default-frame-alist '(width . 180))
+(add-to-list 'default-frame-alist '(width . 200))
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -66,7 +70,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
+   '(counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -118,4 +122,24 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.5))
+
+(use-package projectile
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :init
+  (setq-default projectile-cache-file
+                (expand-file-name ".projectile-cache" user-emacs-directory))
+;;  (add-hook 'prog-mode-hook #'projectile-mode)
+
+  :config
+  (projectile-mode)
+  (setq projectile-completion-system 'ivy)
+  (setq-default projectile-enable-caching t
+                projectile-mode-line-prefix ""
+                projectile-sort-order 'recentf
+                ;; Show project (if any) name in modeline
+                projectile-mode-line '(:eval (projectile-project-name))))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
 
