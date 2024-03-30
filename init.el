@@ -12,6 +12,11 @@
 ;; Show line numbers
 (global-linum-mode)
 
+;; Disable line numbers for some modes
+(dolist (mode '(term-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 ;; Enable undo-tree
 (global-undo-tree-mode)
 
@@ -32,15 +37,12 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; theme setup
-(setq custom-safe-themes t)
-
 (use-package doom-themes
   :ensure t
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-wilmersdorf))
+  (load-theme 'doom-wilmersdorf t))
 
 ;; Initial frame height and width
 (add-to-list 'default-frame-alist '(height . 100))
@@ -52,6 +54,10 @@
 ;; Turn off audible bell
 (setq ring-bell-function 'ignore)
 
+;; Use rainbowed delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; Show full path in title bar
 (setq-default frame-title-format "%b (%f)")
 (custom-set-variables
@@ -60,7 +66,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
+   '(which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -104,4 +110,12 @@
   :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
+
+;; cheat-sheet for key binding suggestions
+;; delay load after 5 ms
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.5))
 
