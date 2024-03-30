@@ -6,6 +6,9 @@
 ;; Highlight the line on point - always
 (global-hl-line-mode t)
 
+;; Show column location of pointer
+(column-number-mode)
+
 ;; Show line numbers
 (global-linum-mode)
 
@@ -72,8 +75,10 @@
 (global-set-key (kbd "<f8>") 'neotree-toggle)
 (add-hook 'emacs-startup-hook 'neotree-toggle)
 
+;; to track command logs
 (use-package command-log-mode)
 
+;; ivy setup
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -94,6 +99,7 @@
 
 (require 'counsel)
 
+;; set up the doom mode line
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
