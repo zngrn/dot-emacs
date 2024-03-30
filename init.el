@@ -23,6 +23,9 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
 (require 'use-package)
 (setq use-package-always-ensure t)
 
@@ -53,8 +56,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("1f292969fc19ba45fbc6542ed54e58ab5ad3dbe41b70d8cb2d1f85c22d07e518" default))
  '(package-selected-packages
    '(counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
@@ -90,6 +91,8 @@
          ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
+
+(require 'counsel)
 
 (use-package doom-modeline
   :ensure t
