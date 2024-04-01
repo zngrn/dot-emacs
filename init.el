@@ -32,6 +32,10 @@
 ;; Type over selection
 (delete-selection-mode 1)
 
+;; Automatically reload files when they change on disk
+(global-auto-revert-mode 1)
+(setq auto-revert-verbose nil)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(term-mode-hook
                 eshell-mode-hook))
@@ -136,7 +140,17 @@
   :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)
-	   (doom-modeline-minor-modes nil)))
+	   (doom-modeline-bar-width 4)
+	   (doom-modeline-major-mode-color-icon t)
+	   (doom-modeline-major-mode-icon t)
+	   (doom-modeline-indent-info t)
+	   (doom-modeline-project-detection 'relative-from-project)
+	   (doom-modeline-minor-modes t)))
+
+;; nyan mode
+(use-package nyan-mode
+  :init
+  (nyan-mode))
 
 ;; cheat-sheet for key binding suggestions
 ;; delay load after 5 ms
