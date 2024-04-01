@@ -92,7 +92,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
+   '(hl-todo fast-scroll add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -195,4 +195,14 @@
 	 (before-save . tide-format-before-save))
   :config
   (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
+
+;; Fast-scrolling
+(use-package fast-scroll
+  :config
+  (fast-scroll-config)
+  (fast-scroll-mode 1))
+
+;; Highlight TODO everywhere
+(use-package hl-todo
+  :config (global-hl-todo-mode t))
 
