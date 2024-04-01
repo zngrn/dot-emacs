@@ -27,6 +27,13 @@
 ;; Enable undo-tree
 (global-undo-tree-mode)
 
+;; Font(s)
+(set-face-attribute 'default nil
+                    :family "Fira Code"
+		    :height 120
+                    :weight 'normal
+                    :width 'normal)
+
 ;; Initialize package sources
 (require 'package)
 
@@ -52,7 +59,7 @@
   (load-theme 'doom-wilmersdorf t))
 
 ;; Initial frame height and width
-(add-to-list 'default-frame-alist '(height . 100))
+(add-to-list 'default-frame-alist '(height . 150))
 (add-to-list 'default-frame-alist '(width . 200))
 
 ;; Changes all yes/no questions to y/n type
