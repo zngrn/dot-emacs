@@ -1,3 +1,16 @@
+;; Maintian utf-8 standards
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
+;; Handling gc-handling on 50 MB
+(setq gc-cons-threshold 50000000 gc-cons-percentage 0.6)
+
+;; Reset GC to reasonable defaults
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold 16777216
+                  gc-cons-percentage 0.1)))
+
 ;; Remove tool, menu & scroll bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -58,9 +71,8 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-wilmersdorf t))
 
-;; Initial frame height and width
-(add-to-list 'default-frame-alist '(height . 150))
-(add-to-list 'default-frame-alist '(width . 200))
+;; Initial frame height and width to open to max window size
+(setq default-frame-alist '((fullscreen . maximized)))
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
