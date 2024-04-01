@@ -1,7 +1,11 @@
 *.DS_Store
 auto-save-list
-/elpa/
+elpa/
 *.elc
-/snippets/
+snippets/
 *~
+*.eld
+*.el~
+custom.el
+bookmarks
 

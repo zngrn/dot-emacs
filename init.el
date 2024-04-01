@@ -16,6 +16,9 @@
 ;; Show line numbers
 (global-display-line-numbers-mode t)
 
+;; Type over selection
+(delete-selection-mode 1)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(term-mode-hook
                 eshell-mode-hook))
