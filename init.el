@@ -68,6 +68,12 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Magit setup
+(use-package magit
+  :bind ("C-x g" . 'magit-status)
+  :config
+  (setq magit-set-upstream-on-push 'askifnotset))
+
 (use-package doom-themes
   :ensure t
   :config
@@ -90,19 +96,6 @@
 
 ;; Show full path in title bar
 (setq-default frame-title-format "%b (%f)")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yaml-mode web-mode markdown-mode hl-todo fast-scroll add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; Use elpy for python integration
 (elpy-enable)
