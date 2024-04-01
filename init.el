@@ -73,7 +73,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
+   '(add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -116,7 +116,8 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+  :custom ((doom-modeline-height 15)
+	   (doom-modeline-minor-modes nil)))
 
 ;; cheat-sheet for key binding suggestions
 ;; delay load after 5 ms
@@ -145,4 +146,34 @@
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
+
+;; Flycheck for syntax highlighting and checks
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+;; Use company for autocomplete
+(use-package company
+  :ensure t
+  :hook ((after-init . global-company-mode)))
+
+;; Use typescript major mode
+(use-package typescript-mode
+  :ensure t)
+
+(use-package add-node-modules-path
+  :ensure t
+  :hook ((typescript-mode . add-node-modules-path)))
+
+(setq tide-node-executable "/Users/vjhingran/.nvm/versions/node/v18.16.0/bin/node")
+
+;; tide for typescript
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+	 (before-save . tide-format-before-save))
+  :config
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
 
