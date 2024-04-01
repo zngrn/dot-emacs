@@ -92,7 +92,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(hl-todo fast-scroll add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
+   '(yaml-mode web-mode markdown-mode hl-todo fast-scroll add-node-modules-path typescript-mode counsel-projectile which-key rainbow-delimiters counsel doom-modeline command-log-mode paredit ruby-test-mode neotree auto-complete undo-tree cider json-mode js2-mode tide clojure-mode elpy magit projectile flatui-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -184,7 +184,11 @@
   :ensure t
   :hook ((typescript-mode . add-node-modules-path)))
 
-(setq tide-node-executable "/Users/vjhingran/.nvm/versions/node/v18.16.0/bin/node")
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 ;; tide for typescript
 (use-package tide
@@ -194,6 +198,7 @@
          (typescript-mode . tide-hl-identifier-mode)
 	 (before-save . tide-format-before-save))
   :config
+  (setq tide-node-executable (executable-find "node"))
   (flycheck-add-next-checker 'typescript-tide 'javascript-eslint))
 
 ;; Fast-scrolling
@@ -205,4 +210,27 @@
 ;; Highlight TODO everywhere
 (use-package hl-todo
   :config (global-hl-todo-mode t))
+
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc")
+  :config
+  (add-hook 'gfm-mode-hook 'linum-mode)
+  (add-hook 'markdown-mode-hook 'linum-mode))
+
+(use-package web-mode
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'"   . web-mode)
+         ("\\.json\\'"  . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2))
+
+(use-package yaml-mode)
+
+(use-package json-mode)
 
