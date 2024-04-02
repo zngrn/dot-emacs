@@ -8,4 +8,7 @@ snippets/
 *.el~
 custom.el
 bookmarks
+transient/
+*.#
+*#
 

@@ -1,14 +1,11 @@
 ;;;; init.el
 ;;;; Emacs core config file
 
-;; Maintian utf-8 standards
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-
 ;; Allow loading custom config from specified dir
 (add-to-list 'load-path (expand-file-name "forge" user-emacs-directory))
 
 ;; Load individual init-*.el files here
+(require 'init-code)
 (require 'init-appearance)
 (require 'init-typescript)
 
@@ -59,10 +56,6 @@
 
 ;; Turn off audible bell
 (setq ring-bell-function 'ignore)
-
-;; Use rainbowed delimiters
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Show full path in title bar
 (setq-default frame-title-format "%b (%f)")
@@ -164,31 +157,4 @@
   :config
   (fast-scroll-config)
   (fast-scroll-mode 1))
-
-;; Highlight TODO everywhere
-(use-package hl-todo
-  :config (global-hl-todo-mode t))
-
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc")
-  :config
-  (add-hook 'gfm-mode-hook 'linum-mode)
-  (add-hook 'markdown-mode-hook 'linum-mode))
-
-(use-package web-mode
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'"   . web-mode)
-         ("\\.json\\'"  . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-css-indent-offset 2))
-
-(use-package yaml-mode)
-
-(use-package json-mode)
 
