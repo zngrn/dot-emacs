@@ -1,6 +1,15 @@
+;;;; init.el
+;;;; Emacs core config file
+
 ;; Maintian utf-8 standards
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
+
+;; Allow loading custom config from specified dir
+(add-to-list 'load-path (expand-file-name "forge" user-emacs-directory))
+
+;; Load individual init-*.el files here
+(require 'init-appearance)
 
 ;; Handling gc-handling on 50 MB
 (setq gc-cons-threshold 50000000 gc-cons-percentage 0.6)
@@ -11,24 +20,6 @@
             (setq gc-cons-threshold 16777216
                   gc-cons-percentage 0.1)))
 
-;; Remove tool, menu & scroll bar
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(tooltip-mode -1)
-(scroll-bar-mode -1)
-
-;; Remove startup message
-(setq inhibit-startup-screen t)
-
-;; Highlight the line on point - always
-(global-hl-line-mode t)
-
-;; Show column location of pointer
-(column-number-mode)
-
-;; Show line numbers
-(global-display-line-numbers-mode t)
-
 ;; Type over selection
 (delete-selection-mode 1)
 
@@ -36,20 +27,8 @@
 (global-auto-revert-mode 1)
 (setq auto-revert-verbose nil)
 
-;; Disable line numbers for some modes
-(dolist (mode '(term-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
 ;; Enable undo-tree
 (global-undo-tree-mode)
-
-;; Font(s)
-(set-face-attribute 'default nil
-                    :family "Fira Code"
-		    :height 120
-                    :weight 'normal
-                    :width 'normal)
 
 ;; Initialize package sources
 (require 'package)
@@ -73,16 +52,6 @@
   :bind ("C-x g" . 'magit-status)
   :config
   (setq magit-set-upstream-on-push 'askifnotset))
-
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-wilmersdorf t))
-
-;; Initial frame height and width to open to max window size
-(setq default-frame-alist '((fullscreen . maximized)))
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
