@@ -5,8 +5,8 @@
 (add-to-list 'load-path (expand-file-name "forge" user-emacs-directory))
 
 ;; Load individual init-*.el files here
-(require 'init-code)
 (require 'init-appearance)
+(require 'init-code)
 (require 'init-typescript)
 
 ;; Handling gc-handling on 50 MB
@@ -75,7 +75,7 @@
   :diminish
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)	
+         ("TAB" . ivy-alt-done)
          ("C-l" . ivy-alt-done)
          ("C-j" . ivy-next-line)
          ("C-k" . ivy-previous-line)
