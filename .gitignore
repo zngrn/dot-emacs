@@ -11,4 +11,6 @@ bookmarks
 transient/
 *.#
 *#
-
+.projectile-cache
+.cache
+transient

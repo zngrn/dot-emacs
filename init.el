@@ -18,6 +18,9 @@
             (setq gc-cons-threshold 16777216
                   gc-cons-percentage 0.1)))
 
+;; Improve startup time by pausing garbage collection during init
+(setq gc-cons-threshold most-positive-fixnum)
+
 ;; Type over selection
 (delete-selection-mode 1)
 
@@ -27,6 +30,9 @@
 
 ;; Enable undo-tree
 (global-undo-tree-mode)
+
+;; Disable creating lock files
+(setq create-lockfiles nil)
 
 ;; Initialize package sources
 (require 'package)
@@ -157,4 +163,3 @@
   :config
   (fast-scroll-config)
   (fast-scroll-mode 1))
-
