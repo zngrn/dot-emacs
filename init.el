@@ -4,10 +4,28 @@
 ;; Allow loading custom config from specified dir
 (add-to-list 'load-path (expand-file-name "forge" user-emacs-directory))
 
+;; Initialize package sources
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 ;; Load individual init-*.el files here
 (require 'init-appearance)
 (require 'init-code)
 (require 'init-typescript)
+(require 'init-magit)
 
 ;; Handling gc-handling on 50 MB
 (setq gc-cons-threshold 50000000 gc-cons-percentage 0.6)
@@ -33,29 +51,6 @@
 
 ;; Disable creating lock files
 (setq create-lockfiles nil)
-
-;; Initialize package sources
-(require 'package)
-
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
-
-;; Magit setup
-(use-package magit
-  :bind ("C-x g" . 'magit-status)
-  :config
-  (setq magit-set-upstream-on-push 'askifnotset))
 
 ;; Changes all yes/no questions to y/n type
 (fset 'yes-or-no-p 'y-or-n-p)
