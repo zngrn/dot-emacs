@@ -24,6 +24,7 @@
 ;; Load individual init-*.el files here
 (require 'init-appearance)
 (require 'init-code)
+(require 'init-lsp)
 (require 'init-typescript)
 (require 'init-magit)
 
