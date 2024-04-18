@@ -22,7 +22,7 @@
 (dolist (mode '(term-mode-hook
                 eshell-mode-hook
 		shell-mode-hook
-		neotree-mode-hook))
+		treemacs-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Font(s)
