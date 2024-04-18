@@ -28,7 +28,7 @@
 ;; Font(s)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-		    :height 120
+		    :height 135
                     :weight 'normal
                     :width 'normal)
 

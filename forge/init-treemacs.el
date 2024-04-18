@@ -11,6 +11,7 @@
   :config
   (setq treemacs-collapse-dirs                 (if (executable-find "python") 3 0)
         treemacs-deferred-git-apply-delay      0.5
+	treemacs-follow-mode                   t
         treemacs-directory-name-transformer    #'identity
         treemacs-display-in-side-window        t
         treemacs-eldoc-display                 t
@@ -28,7 +29,7 @@
         treemacs-move-forward-on-expand       nil
         treemacs-no-png-images                nil
         treemacs-no-delete-other-windows      t
-        treemacs-project-follow-cleanup       nil
+        treemacs-project-follow-cleanup       'always
         treemacs-persist-file                 (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
         treemacs-position                     'left
         treemacs-recenter-distance            0.1
@@ -37,7 +38,7 @@
         treemacs-recenter-after-project-jump  'always
         treemacs-recenter-after-project-expand 'on-distance
         treemacs-show-cursor                  nil
-        treemacs-show-hidden-files            t
+        treemacs-show-hidden-files            nil
         treemacs-silent-filewatch             nil
         treemacs-silent-refresh               nil
         treemacs-sorting                      'alphabetic-asc
