@@ -7,7 +7,8 @@
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2))
+  (setq typescript-indent-level 2)
+  (setq lsp-clients-typescript-server 'typescript-language-server))
 
 ;; handle node path to pair with ts mode
 (use-package add-node-modules-path
