@@ -27,6 +27,7 @@
 (require 'init-lsp)
 (require 'init-company)
 (require 'init-treemacs)
+(require 'init-clojure)
 (require 'init-typescript)
 (require 'init-magit)
 
