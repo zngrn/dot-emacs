@@ -1,7 +1,7 @@
 # zngrn's emacs config
 
-  * Sits in `/.emacs.d`.
-  * Entry point is `./.emacs.d/init.el`.
+  * Sits in `~/.emacs.d`.
+  * Entry point is `~/.emacs.d/init.el`.
 
 ## Installation Notes:
 
