@@ -16,6 +16,13 @@
   ;; add paths to local installation of tools like lein
   (setenv "PATH" (concat "/usr/local/bin" path-separator (getenv "PATH"))))
 
+;; use lsp hooks for go specific setup
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
 ;; tree-view of code hierarchy
 (use-package lsp-treemacs
   :after lsp)
