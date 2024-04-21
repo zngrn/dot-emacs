@@ -7,7 +7,8 @@
   :hook ((clojure-mode . lsp)
 	 (clojurec-mode . lsp)
 	 (clojurescript-mode . lsp)
-	 (web-mode . lsp))
+	 (web-mode . lsp)
+	 (go-mode . lsp))
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
