@@ -3,6 +3,7 @@
 ;;;; configure golang
 
 (use-package go-mode
+  :mode "\\.go\\'"
   :ensure t
   :hook (go-mode . (lambda ()
                      (add-hook 'before-save-hook 'gofmt-before-save nil t)))
