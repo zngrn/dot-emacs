@@ -38,7 +38,8 @@
 
 (use-package yaml-mode)
 
-(use-package json-mode)
+(use-package json-mode
+  :config
+  (setq js-indent-level 2))
 
 (provide 'init-code)
-
