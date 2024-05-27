@@ -154,16 +154,3 @@
   :config
   (fast-scroll-config)
   (fast-scroll-mode 1))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(go-mode yaml-mode which-key web-mode use-package undo-tree typescript-mode tide smartparens ruby-test-mode rainbow-delimiters nyan-mode nord-theme neotree magit lsp-treemacs lsp-ivy json-mode js2-mode hl-todo flatui-theme fast-scroll exec-path-from-shell elpy doom-themes doom-modeline dashboard counsel-projectile company-box command-log-mode clojure-mode-extra-font-locking clj-refactor auto-complete all-the-icons add-node-modules-path)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
