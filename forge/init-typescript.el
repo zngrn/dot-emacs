@@ -9,7 +9,7 @@
   :config
   (setq typescript-indent-level 2)
   (setq lsp-clients-typescript-server 'typescript-language-server)
-  (add-hook 'typescript-mode-hook 'paredit-mode))
+  (add-hook 'typescript-mode-hook 'smartparens-mode))
 
 ;; handle node path to pair with ts mode
 (use-package add-node-modules-path

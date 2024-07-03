@@ -28,7 +28,10 @@
 
 ;; also plugs for other modes
 (use-package smartparens
-  :init (add-hook 'markdown-mode-hook 'smartparens-mode))
+  :init (add-hook 'markdown-mode-hook 'smartparens-mode)
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode t))
 
 ;; paredit makes it easier to navigate/edit s-expressions as blocks.
 (use-package paredit
