@@ -18,6 +18,12 @@
 ;; Show line numbers
 (global-display-line-numbers-mode t)
 
+;; Use golden ratio to resize windows based on focus, automatically
+(use-package golden-ratio
+  :diminish golden-ratio-mode
+  :init
+  (golden-ratio-mode 1))
+
 ;; Disable line numbers for some modes though
 (dolist (mode '(term-mode-hook
                 eshell-mode-hook
