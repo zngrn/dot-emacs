@@ -7,7 +7,8 @@
   :ensure t
   :config
   (setq gofmt-command "goimports")
-  (add-to-list 'exec-path (expand-file-name "~/go/bin")))
+  (add-to-list 'exec-path (expand-file-name "~/go/bin"))
+  (add-hook 'go-mode-hook 'paredit-mode))
 
 ;; path to gopls
 (setq lsp-gopls-server-path "~/go/bin/gopls")
