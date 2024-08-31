@@ -31,6 +31,7 @@
 (require 'init-typescript)
 (require 'init-go)
 (require 'init-magit)
+(require 'init-nov)
 
 ;; Handling gc-handling on 50 MB
 (setq gc-cons-threshold 50000000 gc-cons-percentage 0.6)
