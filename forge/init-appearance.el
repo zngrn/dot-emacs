@@ -44,7 +44,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-wilmersdorf t))
+  (load-theme 'doom-dark+ t))
 
 ;; Initial frame height and width to open to max window size
 ;; works well with external displays as well
