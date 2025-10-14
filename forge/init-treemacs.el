@@ -31,7 +31,7 @@
         treemacs-no-delete-other-windows      t
         treemacs-project-follow-cleanup       'always
         treemacs-persist-file                 (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-        treemacs-position                     'left
+        treemacs-position                     'right
         treemacs-recenter-distance            0.1
         treemacs-recenter-after-file-follow   nil
         treemacs-recenter-after-tag-follow    nil
