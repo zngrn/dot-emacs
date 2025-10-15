@@ -34,9 +34,9 @@
 ;; Font(s)
 (set-face-attribute 'default nil
                     :family "Fira Code"
-		    :height 135
-                    :weight 'normal
-                    :width 'normal)
+		    :height 138
+                    :weight 'semi-light
+                    :width 'semi-condensed)
 
 ;; Theme usage
 (use-package doom-themes
