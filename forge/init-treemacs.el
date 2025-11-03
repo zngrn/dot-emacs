@@ -49,6 +49,9 @@
         treemacs-user-header-line-format      nil
         treemacs-width                        35
         treemacs-workspace-switch-cleanup     nil)
+  ;; Set smaller font size for treemacs buffers
+  (add-hook 'treemacs-mode-hook
+            (lambda () (text-scale-set -1)))
   :bind
   (:map global-map
         ("M-0"       . treemacs-select-window)
