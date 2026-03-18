@@ -39,6 +39,7 @@
 (require 'init-go)
 (require 'init-magit)
 (require 'init-nov)
+(require 'init-vterm)
 
 ;; Reset GC to reasonable defaults after startup
 ;; (GC is paused in early-init.el for fast startup)
@@ -154,3 +155,7 @@
   :config
   (fast-scroll-config)
   (fast-scroll-mode 1))
+;; Custom settings live in custom.el — do not duplicate here
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))

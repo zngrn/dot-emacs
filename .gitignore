@@ -16,3 +16,4 @@ transient/
 transient
 .lsp-session*
 cider-history
+recentf
