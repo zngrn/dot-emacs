@@ -12,3 +12,8 @@
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
+(push '(fullscreen . maximized) default-frame-alist)
+
+;; Set dark background before frame draws to prevent white flash
+(push '(background-color . "#1b1d1e") default-frame-alist)
+(push '(foreground-color . "#d6d6d4") default-frame-alist)

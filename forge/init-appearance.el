@@ -48,8 +48,6 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-dark+ t))
 
-;; Initial frame height and width to open to max window size
-;; works well with external displays as well
-(setq default-frame-alist '((fullscreen . maximized)))
+;; Fullscreen is set in early-init.el to avoid small-window flash
 
 (provide 'init-appearance)
