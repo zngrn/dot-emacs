@@ -40,17 +40,12 @@
 (require 'init-magit)
 (require 'init-nov)
 
-;; Handling gc-handling on 50 MB
-(setq gc-cons-threshold 50000000 gc-cons-percentage 0.6)
-
-;; Reset GC to reasonable defaults
+;; Reset GC to reasonable defaults after startup
+;; (GC is paused in early-init.el for fast startup)
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold 16777216
                   gc-cons-percentage 0.1)))
-
-;; Improve startup time by pausing garbage collection during init
-(setq gc-cons-threshold most-positive-fixnum)
 
 ;; Type over selection
 (delete-selection-mode 1)
@@ -74,8 +69,11 @@
 ;; Show full path in title bar
 (setq-default frame-title-format "%b (%f)")
 
-;; Use elpy for python integration
-(elpy-enable)
+;; Use elpy for python integration (deferred until python-mode)
+(use-package elpy
+  :ensure t
+  :defer t
+  :init (advice-add 'python-mode :before (lambda (&rest _) (elpy-enable))))
 
 ;; to track command logs
 (use-package command-log-mode)

@@ -1,10 +1,12 @@
 ;;;; init-appearance.el
 
 ;; Remove tool, menu & scroll bar
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(tooltip-mode -1)
-(scroll-bar-mode -1)
+;; These are also suppressed in early-init.el for faster startup;
+;; guard here for daemon/batch mode compatibility.
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tooltip-mode) (tooltip-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; Remove startup message
 (setq inhibit-startup-screen t)
