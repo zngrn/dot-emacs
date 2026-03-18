@@ -42,4 +42,24 @@
   :config
   (setq js-indent-level 2))
 
+;; Multiple cursors
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C->"     . mc/mark-next-like-this)         ; add cursor at next match
+         ("C-<"     . mc/mark-previous-like-this)     ; add cursor at previous match
+         ("C-c m a" . mc/mark-all-like-this)           ; cursors on all matches
+         ("C-c m l" . mc/edit-lines)                   ; cursor on each selected line
+         ("C-c m r" . set-rectangular-region-anchor)))  ; rectangular selection
+
+;; Code folding via hs-minor-mode (built-in)
+;; Works with functions, classes, JSON objects, etc.
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(add-hook 'json-mode-hook 'hs-minor-mode)
+
+;; Folding keybindings
+(global-set-key (kbd "C-c f t") 'hs-toggle-hiding)    ; toggle at point
+(global-set-key (kbd "C-c f a") 'hs-hide-all)         ; collapse all
+(global-set-key (kbd "C-c f s") 'hs-show-all)         ; expand all
+(global-set-key (kbd "C-c f l") 'hs-hide-level)       ; collapse to level
+
 (provide 'init-code)
