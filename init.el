@@ -40,6 +40,7 @@
 (require 'init-magit)
 (require 'init-nov)
 (require 'init-vterm)
+(require 'init-claude)
 
 ;; Reset GC to reasonable defaults after startup
 ;; (GC is paused in early-init.el for fast startup)
