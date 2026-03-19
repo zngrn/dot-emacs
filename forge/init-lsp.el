@@ -13,6 +13,17 @@
   (setq lsp-keymap-prefix "C-c l")
   :config
   (lsp-enable-which-key-integration t)
+
+  ;; Completion improvements
+  (setq lsp-completion-show-detail t)
+  (setq lsp-completion-show-kind t)
+  (setq lsp-completion-sort-initial-results t)
+  (setq lsp-enable-snippet nil)
+
+  ;; Disable file watchers — prevents the "Watching all files" prompt
+  ;; for non-project directories like ~/Downloads
+  (setq lsp-enable-file-watchers nil)
+
   ;; add paths to local installation of tools like lein
   (setenv "PATH" (concat "/usr/local/bin" path-separator (getenv "PATH"))))
 

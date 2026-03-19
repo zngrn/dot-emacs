@@ -137,8 +137,6 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy)
-  (setq projectile-globally-ignored-directories
-        '("~/Downloads" "~/Library" "node_modules" ".git" "dist" "build" ".cache"))
   (setq-default projectile-enable-caching t
                 projectile-mode-line-prefix ""
                 projectile-sort-order 'recentf
