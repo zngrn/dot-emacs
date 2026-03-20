@@ -25,6 +25,7 @@
   (("C-c t" . vterm)
    ("C-c T" . (lambda () (interactive) (vterm t)))  ; new vterm buffer
    :map vterm-mode-map
+   ("S-<return>" . (lambda () (interactive) (vterm-send-string "\e[13;2u")))  ; Shift+Enter for Claude CLI newlines
    ("s-k"     . vterm-clear)              ; Cmd+k clears like in native terminal
    ("C-c C-c" . vterm-send-C-c)
    ("C-c C-d" . vterm-send-C-d)
