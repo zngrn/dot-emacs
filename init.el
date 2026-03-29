@@ -137,7 +137,7 @@
   :config
   (projectile-mode)
   (setq projectile-completion-system 'ivy)
-  (setq-default projectile-enable-caching t
+  (setq-default projectile-enable-caching nil
                 projectile-mode-line-prefix ""
                 projectile-sort-order 'recentf
                 ;; Show project (if any) name in modeline
