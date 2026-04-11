@@ -136,12 +136,12 @@
 
   :config
   (projectile-mode)
-  (setq projectile-completion-system 'ivy)
-  (setq-default projectile-enable-caching nil
-                projectile-mode-line-prefix ""
-                projectile-sort-order 'recentf
-                ;; Show project (if any) name in modeline
-                projectile-mode-line '(:eval (projectile-project-name))))
+  (setq projectile-completion-system 'ivy
+        projectile-enable-caching t
+        projectile-mode-line-prefix ""
+        projectile-sort-order 'default
+        ;; doom-modeline already shows project name — skip duplicate detection
+        projectile-mode-line ""))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
