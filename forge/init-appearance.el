@@ -40,6 +40,25 @@
                     :weight 'semi-light
                     :width 'semi-condensed)
 
+;; Fira Code ligatures
+(use-package ligature
+  :ensure t
+  :config
+  (ligature-set-ligatures 'prog-mode
+                          '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\"
+                            "{-" "[]" "::" ":::" ":=" "!!" "!=" "!==" "-}"
+                            "--" "---" "-->" "->" "->>" "-<" "-<<" "-~"
+                            "#{" "#[" "##" "###" "####" "#(" "#?" "#_" "#_("
+                            ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*"
+                            "/**" "/=" "/==" "/>" "//" "///" "&&" "||" "||="
+                            "|=" "|>" "^=" "$>" "++" "+++" "+>" "=:=" "=="
+                            "===" "==>" "=>" "=>>" "<=" "=<<" "=/=" ">-" ">="
+                            ">=>" ">>" ">>-" ">>=" ">>>" "<*" "<*>" "<|" "<|>"
+                            "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
+                            "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
+                            "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"))
+  (global-ligature-mode t))
+
 ;; Theme usage
 (use-package doom-themes
   :ensure t
@@ -47,6 +66,18 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (load-theme 'doom-dark+ t))
+
+;; Spacious padding for a modern, airy look
+(use-package spacious-padding
+  :ensure t
+  :config
+  (setq spacious-padding-widths
+        '(:internal-border-width 12
+          :header-line-width 4
+          :mode-line-width 4
+          :right-divider-width 12
+          :fringe-width 8))
+  (spacious-padding-mode 1))
 
 ;; Fullscreen is set in early-init.el to avoid small-window flash
 

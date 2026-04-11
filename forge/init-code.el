@@ -22,15 +22,14 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc")
-  :config
-  (add-hook 'gfm-mode-hook 'linum-mode)
-  (add-hook 'markdown-mode-hook 'linum-mode))
+  :init (setq markdown-command "pandoc -s --self-contained --highlight-style=pygments"
+              markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.css")
+              markdown-xhtml-header-content "<style>body { box-sizing: border-box; min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px; }</style>")
+)
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'"   . web-mode)
-         ("\\.json\\'"  . web-mode))
+         ("\\.css\\'"   . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-code-indent-offset 2)

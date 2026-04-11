@@ -18,7 +18,7 @@
 ;; highlight matching parentheses
 (require 'paren)
 (show-paren-mode 1)
-(setq show-paren-delay 1)
+(setq show-paren-delay 0.05)
 (set-face-background 'show-paren-match (face-background 'default))
 
 (if (eq (frame-parameter nil 'background-mode) 'dark)
@@ -39,10 +39,6 @@
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
-
-;; add some colors to those boring parens
-(use-package rainbow-delimiters
-  :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; cider integrates a Clojure buffer with a REPL
 (use-package cider

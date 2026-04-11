@@ -57,7 +57,9 @@
 (setq auto-revert-verbose nil)
 
 ;; Enable undo-tree
-(global-undo-tree-mode)
+(use-package undo-tree
+  :ensure t
+  :config (global-undo-tree-mode))
 
 ;; Disable creating lock files
 (setq create-lockfiles nil)
@@ -99,7 +101,9 @@
   :config
   (ivy-mode 1))
 
-(require 'counsel)
+(use-package counsel
+  :ensure t
+  :config (counsel-mode 1))
 
 ;; set up the doom mode line
 (use-package doom-modeline
