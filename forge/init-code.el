@@ -17,15 +17,30 @@
 (use-package hl-todo
   :config (global-hl-todo-mode t))
 
+(defvar my/markdown-preview-header
+  (expand-file-name "markdown-preview-header.html"
+                    (file-name-directory (or load-file-name buffer-file-name)))
+  "Pandoc --include-in-header file: base styles + mermaid bootstrap.")
+
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "pandoc -s --self-contained --highlight-style=pygments"
-              markdown-css-paths '("https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.css")
-              markdown-xhtml-header-content "<style>body { box-sizing: border-box; min-width: 200px; max-width: 980px; margin: 0 auto; padding: 45px; }</style>")
-)
+  :init
+  ;; Pandoc's -s already produces a standalone document, so markdown-mode's
+  ;; `markdown-css-paths' / `markdown-xhtml-header-content' are ignored.
+  ;; Pass CSS and the header (mermaid script) to pandoc directly instead.
+  (setq markdown-command
+        (mapconcat #'identity
+                   (list "pandoc -s"
+                         "--embed-resources --standalone"
+                         "--highlight-style=pygments"
+                         "--metadata title=Preview"
+                         "--css=https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.css"
+                         (format "--include-in-header=%s"
+                                 (shell-quote-argument my/markdown-preview-header)))
+                   " ")))
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)

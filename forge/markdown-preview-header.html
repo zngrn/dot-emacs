@@ -1,0 +1,19 @@
+<style>
+  body { box-sizing: border-box; min-width: 200px; max-width: 980px;
+         margin: 0 auto; padding: 45px; }
+  pre.mermaid { background: transparent; text-align: center; }
+</style>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  // Pandoc emits ```mermaid as <pre class="mermaid"><code>…</code></pre>
+  // (or <pre class="sourceCode mermaid"> under pygments). Lift the text
+  // out of <code> so mermaid.run() can render it in place.
+  document.querySelectorAll('pre.mermaid code, pre.sourceCode.mermaid code')
+    .forEach((code) => {
+      const pre = code.closest('pre');
+      pre.className = 'mermaid';
+      pre.textContent = code.textContent;
+    });
+  mermaid.initialize({ startOnLoad: false, theme: 'default' });
+  mermaid.run();
+</script>
