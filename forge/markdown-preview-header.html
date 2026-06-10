@@ -1,7 +1,25 @@
 <style>
-  body { box-sizing: border-box; min-width: 200px; max-width: 980px;
-         margin: 0 auto; padding: 45px; }
-  pre.mermaid { background: transparent; text-align: center; }
+  /* github-markdown-css scopes every rule under .markdown-body, so the
+     content must live inside a .markdown-body wrapper (see the
+     --include-before/after-body files) for any of it to apply. */
+  body { margin: 0; }
+  .markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+  }
+  @media (max-width: 767px) {
+    .markdown-body { padding: 15px; }
+  }
+  /* Override github's `.markdown-body pre` background for mermaid blocks. */
+  .markdown-body pre.mermaid { background: transparent; text-align: center; }
+
+  /* Page background follows the system colour scheme so it matches
+     github-markdown.css, which already switches via prefers-color-scheme. */
+  @media (prefers-color-scheme: light) { body { background-color: #ffffff; } }
+  @media (prefers-color-scheme: dark)  { body { background-color: #0d1117; } }
 </style>
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -14,6 +32,8 @@
       pre.className = 'mermaid';
       pre.textContent = code.textContent;
     });
-  mermaid.initialize({ startOnLoad: false, theme: 'default' });
+  // Match mermaid's theme to the system colour scheme.
+  const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
   mermaid.run();
 </script>
