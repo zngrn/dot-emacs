@@ -28,6 +28,11 @@
     (exec-path-from-shell-initialize)))
 
 
+;; flx scores ivy's fuzzy matches so basename and word-boundary hits rank
+;; first. Ivy checks for it once at load time, and init-lsp pulls in ivy
+;; via lsp-ivy, so flx must load before the init-* requires below.
+(use-package flx)
+
 ;; Load individual init-*.el files here
 (require 'init-appearance)
 (require 'init-code)
@@ -99,7 +104,19 @@
          ("C-k" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
   :config
-  (ivy-mode 1))
+  (ivy-mode 1)
+  ;; Loose subsequence matching for project file finding: "mph" matches
+  ;; markdown-preview-header.html. Everything else (swiper, M-x, ...)
+  ;; keeps the default matcher so results stay precise.
+  (setq ivy-re-builders-alist
+        '((counsel-projectile-find-file . ivy--regex-fuzzy)
+          (counsel-projectile . ivy--regex-fuzzy)
+          (projectile-completing-read . ivy--regex-fuzzy)
+          (t . ivy--regex-plus))
+        ;; flx only sorts matches when they fit under this cap; the default
+        ;; of 200 means no smart ordering in a large project until the
+        ;; candidate list is already narrowed way down
+        ivy-flx-limit 5000))
 
 (use-package counsel
   :ensure t
@@ -148,7 +165,28 @@
         projectile-mode-line ""))
 
 (use-package counsel-projectile
+  ;; :demand keeps the package loading eagerly — :bind alone would defer it,
+  ;; leaving counsel-projectile-mode off until the first s-p press
+  :demand t
+  :bind (("s-p" . counsel-projectile-find-file)) ; quick-open on Cmd+P
   :config (counsel-projectile-mode))
+
+;; Frecency sorting: files picked often/recently float to the top, so an
+;; empty Cmd+P prompt starts with recent files
+(use-package ivy-prescient
+  :after counsel
+  :custom
+  (ivy-prescient-enable-filtering nil) ; sorting only; matching stays with flx
+  :config
+  (prescient-persist-mode 1) ; remember choices across restarts
+  (ivy-prescient-mode 1))
+
+;; File icons + dimmed metadata columns in ivy lists
+;; (nerd-icons-ivy-rich-mode must be enabled before ivy-rich-mode)
+(use-package nerd-icons-ivy-rich
+  :init
+  (nerd-icons-ivy-rich-mode 1)
+  (ivy-rich-mode 1))
 
 ;; Flycheck for syntax highlighting and checks
 (use-package flycheck

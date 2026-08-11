@@ -17,4 +17,5 @@ transient
 .lsp-session*
 cider-history
 recentf
+prescient-save.el
 site-lisp/
