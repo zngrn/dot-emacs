@@ -23,6 +23,7 @@
 </style>
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  import svgPanZoom from 'https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.2/+esm';
   // Pandoc emits ```mermaid as <pre class="mermaid"><code>…</code></pre>
   // (or <pre class="sourceCode mermaid"> under pygments). Lift the text
   // out of <code> so mermaid.run() can render it in place.
@@ -33,7 +34,20 @@
       pre.textContent = code.textContent;
     });
   // Match mermaid's theme to the system colour scheme.
+  // useMaxWidth:false keeps each SVG at a real size so svg-pan-zoom has
+  // something to scale — otherwise mermaid stretches it to 100% width and
+  // zoom/pan has no fixed geometry to work with.
   const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default' });
-  mermaid.run();
+  mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'default',
+                       flowchart: { useMaxWidth: false },
+                       sequence:  { useMaxWidth: false },
+                       state:     { useMaxWidth: false } });
+  // run() is async; wait for the SVGs before wiring up pan/zoom.
+  await mermaid.run();
+  document.querySelectorAll('pre.mermaid svg').forEach((svg) => {
+    svg.style.maxWidth = '100%';
+    svg.style.height = 'auto';
+    svgPanZoom(svg, { controlIconsEnabled: true,   // on-diagram +/-/reset
+                      fit: true, center: true, minZoom: 0.3, maxZoom: 10 });
+  });
 </script>
