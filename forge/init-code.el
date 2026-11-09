@@ -44,7 +44,7 @@
         (mapconcat #'identity
                    (list "pandoc -s"
                          "--embed-resources --standalone"
-                         "--highlight-style=pygments"
+                         "--syntax-highlighting=pygments"
                          "--metadata title=Preview"
                          "--css=https://cdn.jsdelivr.net/npm/github-markdown-css@5.9.0/github-markdown.css"
                          (format "--include-in-header=%s"
